@@ -116,7 +116,5 @@ class Int():
 with open('./input', 'r') as f:
     inputs = f.read().strip().split(',')
 
-#inputs = '104,1125899906842624,99'.split(',')
-
 prog = Int(inputs)
 prog.run('1')
