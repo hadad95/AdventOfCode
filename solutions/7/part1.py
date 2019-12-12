@@ -3,6 +3,8 @@ class Int():
         self.inputs = inputs.copy()
         self.original_inputs = inputs.copy()
         self.cursor = 0
+        self.output = 0
+        self.halted = False
     
     def run(self, ip):
         self.cursor = 0
@@ -13,10 +15,11 @@ class Int():
             settings = self.inputs[self.cursor].rjust(5, '0')
             opcode = int(settings[-2:])
             if opcode == 99:
-                print('HALT')
-                return
+                #print('HALT')
+                self.halted = True
+                break
 
-            if opcode == 1:
+            elif opcode == 1:
                 param1 = int(self.inputs[self.cursor + 1])
                 param2 = int(self.inputs[self.cursor + 2])
                 param3 = int(self.inputs[self.cursor + 3])
@@ -40,7 +43,7 @@ class Int():
             elif opcode == 4:
                 param1 = int(self.inputs[self.cursor + 1])
                 val1 = int(self.inputs[param1]) if int(settings[-3]) == 0 else param1
-                return str(val1)
+                self.output = str(val1)
                 self.cursor += 2
             elif opcode == 5:
                 param1 = int(self.inputs[self.cursor + 1])
@@ -101,13 +104,14 @@ current_config = [0, 0, 0, 0, 0]
 optimum_config = [0, 0, 0, 0, 0]
 
 def calc(index, loop, ip):
+    global total
+    global optimum_config
+    global current_config
     for i in loop:
-        global current_config
         current_config[index] = i
-        out = prog.run([str(i), ip])
+        prog.run([str(i), ip])
+        out = prog.output
         if index == 4:
-            global total
-            global optimum_config
             if int(out) > total:
                 optimum_config = current_config.copy()
                 total = int(out)
