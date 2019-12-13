@@ -123,9 +123,6 @@ with open('./input', 'r') as f:
 
 inputs[0] = '2'
 prog = Int(inputs)
-width = 42
-height = 24
-grid = [[-1] * 24 for i in range(42)]
 blocks_count = 0
 ball_loc = [0, 0]
 paddle_loc = [0, 0]
@@ -155,6 +152,5 @@ while not prog.halted:
                 paddle_loc = [int(x), int(y)]
             elif int(tile) == 4:
                 ball_loc = [int(x), int(y)]
-            grid[int(x)][int(y)] = int(tile)
 
 print(f'Score: {score}')
