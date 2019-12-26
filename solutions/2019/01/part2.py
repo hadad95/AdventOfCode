@@ -11,12 +11,9 @@ def calc_fuel(fuel):
     
 
 with open('./input', 'r') as f:
-    inputs = f.read().split('\n')
+    inputs = f.read().strip().split('\n')
     
 for fuel in inputs:
-    if fuel == '':
-        continue
-    
     calc_fuel(fuel)
 
 print(total)
