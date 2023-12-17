@@ -5,7 +5,7 @@ fn main() {
     let txt: String = fs::read_to_string("../input.txt").expect("Should have opened the input file");
     let mut result: i32 = 0;
     for line in txt.lines() {
-        let games = &line[line.find(":").unwrap()+1..].trim();
+        let games = line[line.find(":").unwrap()+1..].trim();
         let hands: Vec<&str> = games.split(";").map(|x: &str| x.trim()).collect::<Vec<&str>>();
         let mut r: i32 = 0;
         let mut g: i32 = 0;
